@@ -1,0 +1,13 @@
+// Copyright (C) 2010, Guy Barrand. All rights reserved.
+// See the file inexlib_serv.license for terms.
+
+#ifndef inexlib_serv_inexlib_serv_version
+#define inexlib_serv_inexlib_serv_version
+
+#define INEXLIB_SERV_MAJOR_VERSION 1
+#define INEXLIB_SERV_MINOR_VERSION 0
+#define INEXLIB_SERV_PATCH_VERSION 0
+#define INEXLIB_SERV_VERSION "1.0.0"
+#define INEXLIB_SERV_VERSION_VRP "v1r0p0"
+
+#endif
