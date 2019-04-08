@@ -1,3 +1,32 @@
+1.1.0 :
+  - camera buttons at right : central button : if in examiner viewer (being "3D" in left panel) :
+      "R/RX" mode : left/right rotate around y, up/down rotate around x.
+      "R/FB" mode : left/right rotate around y, up/down forward/backward.
+  - camera buttons at right : "P/O" button to toggle ortho/perspective.
+  - camera buttons at right : remove the start anim button. (We keeep for the moment the stop anim button).
+  - if perspective : "R/Z" up/down : zoom => change height_angle and not move forwar or backward.
+  - revisit passing window size arguments. If passwing "-ww=1000" we have now a window of 1000 pixels in width.
+    (On laptop, previous logic preferred th portrait mode, now we prefer here the landscape mode).
+  - Windows, X11 : command line arguments : handlee -host and -port arguments.
+  - anims : we disable the anim timer when stopping an anim.
+  - central menu : files and ftp menu item.
+  - handle remote protocols :
+      protocol_view_all
+      protocol_set_background_black
+      protocol_set_background_white
+      protocol_disable_anim
+      protocol_reset_camera
+  - camera buttons at left : '>' : "view all" : modify logic to ensure all the scene is viewed.
+    Handle properly the case of being in landscape with a scene more tall that large.
+  - camera menu at left : "~" : to switch on/off blending.
+  - git pages : App general behaviour : add doc for popup menus.
+  - git pages : section "Running at home behind your box".
+  - ssh and "-R" port redirection : at LAL : it works by running on my Android (a Galaxy Note 8)
+    on eduroam with cube_to_sg_serv on lx2 and ssh connected by using JuiceSSH (then on Android)
+    with a "-R" port redirection.
+  - ssh and "-R" port rediection : at LAL : it works by running on my Mac at LAL with cube_to_sg_serv
+    on the Spark front-end.
+
 1.0.0 :
  - birth 22/02/2019.
 
