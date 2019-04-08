@@ -39,22 +39,34 @@ inline inlib::sg::return_action action_sg_serv_init(inlib::sg::gui_viewer& a_gv)
   inlib::sg::add_callback(a_gv,*entries,action_sg_serv_launch);
   entries->label = "initialize";
 
+  const args& _args = a_gv.argcv();
+  
  {std::string host;
-  if(!net::host_name(a_gv.out(),host)){
-    a_gv.out() << "inlib::cbk::sg_serv : inlib::net::host_name() failed." << std::endl;
-    entries->add_ip("this ip","");
+  if(_args.find("-host",host)) {
+    entries->add_ip("arg ip",host);
   } else {
-    std::string sip;
-    if(!net::inet_sip(a_gv.out(),host,sip)){
-      a_gv.out() << "inlib::cbk::sg_serv : inlib::net::inet_sip() failed." << std::endl;
+    if(!net::host_name(a_gv.out(),host)){
+      a_gv.out() << "inlib::cbk::sg_serv : inlib::net::host_name() failed." << std::endl;
       entries->add_ip("this ip","");
     } else {
-      entries->add_ip("this ip",sip);
-    //entries->add_string("this ip",sip);
-    //entries->add_not_editable("this ip",sip);
+      std::string sip;
+      if(!net::inet_sip(a_gv.out(),host,sip)){
+        a_gv.out() << "inlib::cbk::sg_serv : inlib::net::inet_sip() failed." << std::endl;
+        entries->add_ip("this ip","");
+      } else {
+        entries->add_ip("this ip",sip);
+      //entries->add_string("this ip",sip);
+      //entries->add_not_editable("this ip",sip);
+      }
     }
   }}
-  entries->add_uint("port",50800);
+
+ {unsigned int port;
+  if(_args.find<unsigned int>("-port",port,50800)) {
+    entries->add_uint("port",port);
+  } else {
+    entries->add_uint("port",50800);
+  }}
 
   a_gv.push_list(entries);
   return inlib::sg::return_to_render;
