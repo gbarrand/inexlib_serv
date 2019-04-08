@@ -27,8 +27,7 @@ inline void at_exit() {std::cout << "exlib_main : at_exit..."<< std::endl;inlib:
 #include <cstdlib>
 
 template <class APP_CONTEXT,class APP_MAIN>
-inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_land = true) {
-  //NOTE : we enforce landscape by default for desktop oapps.
+inline int exlib_main(const std::string& a_app_name,int argc,char** argv) {
   bool verbose = false;
 
 #ifdef INLIB_MEM
@@ -48,7 +47,6 @@ inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_
   }
 
   inlib::args args(argc,argv);
-  if(a_land) args.add("-land","");
 
   verbose = args.is_arg("-verbose");
 

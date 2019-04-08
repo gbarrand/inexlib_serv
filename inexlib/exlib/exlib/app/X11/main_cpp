@@ -193,8 +193,7 @@ inline void at_exit() {std::cout << "exlib_main : at_exit..."<< std::endl;inlib:
 #include <inlib/app>
 
 template <class APP_CONTEXT,class APP_MAIN>
-inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_land = true) {
-  //NOTE : we enforce landscape by default for desktop oapps.
+inline int exlib_main(const std::string& a_app_name,int argc,char** argv) {
   bool verbose = false;
 
 #ifdef INLIB_MEM
@@ -211,7 +210,6 @@ inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_
   }
 
   inlib::args args(argc,argv);
-  if(a_land) args.add(inlib::s_arg_land(),"");
 
   verbose = args.is_arg(inlib::s_arg_verbose());
 
@@ -385,7 +383,6 @@ inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_
           break;
         }
         if(have_sock_input) {
-          std::string prot;
           if(!_view_sg_serv->treat_event(exlib::decompress_buffer)) {
             std::cout  << "exlib_main : view_sg_serv::treat_event() failed." << std::endl;
           }
@@ -445,7 +442,6 @@ inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_
 
       if(has_input[2]) {  //from data client :
         if(verbose) std::cout << "exlib_main : input from data client ..." << std::endl;
-        std::string prot;
         if(!_view_sg_serv->treat_event(exlib::decompress_buffer)) {
           std::cout  << "exlib_main : view_sg_serv::treat_event() failed." << std::endl;
         }

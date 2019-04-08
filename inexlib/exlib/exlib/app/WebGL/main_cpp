@@ -15,7 +15,7 @@
 #include <inlib/net/base_socket>
 
 template <class APP_CONTEXT,class APP_MAIN>
-inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_land = true) {//enforce landscape by default for Web apps.
+inline int exlib_main(const std::string& a_app_name,int argc,char** argv) {
 
   bool verbose = false;
 
@@ -30,7 +30,6 @@ inline int exlib_main(const std::string& a_app_name,int argc,char** argv,bool a_
   }
 
   inlib::args args(argc,argv);
-  if(a_land) args.add(inlib::s_arg_land(),"");
 
   if(args.is_arg(inlib::s_arg_help())) {
     std::cout << "args :" << std::endl

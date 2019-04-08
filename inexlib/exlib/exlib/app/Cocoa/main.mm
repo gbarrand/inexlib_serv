@@ -287,7 +287,7 @@ inline void at_exit() {
 #include <inlib/saui>
 
 template <class APP_CONTEXT,class APP_MAIN>
-inline int exlib_main(const std::string& a_app_name,int argc, char** argv,bool a_land = true) {
+inline int exlib_main(const std::string& a_app_name,int argc, char** argv) {
   bool verbose = false;
 
   //NSLog(@"debug : exlib_main : 006");
@@ -323,7 +323,6 @@ inline int exlib_main(const std::string& a_app_name,int argc, char** argv,bool a
 
   //NOTE : with open, we can pass args with : --args <args>
   inlib::args args(argc,argv);
-  if(a_land) args.add("-land","");
 
   verbose = args.is_arg("-verbose");
 
