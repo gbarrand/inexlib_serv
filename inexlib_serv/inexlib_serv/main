@@ -34,6 +34,7 @@ protected:
 #include <exlib/cbk/out>
 
 //#include <inlib/cbk/files>
+#include <inlib/ftp/cbk>
 
 #include <exlib/bsg_opener>
 #include <exlib/sg/rbsg_factories>
@@ -66,13 +67,16 @@ protected:
     //list->text_height_automated.value(true); //too slow.
     //list->visible_items.value(10);
 
-    //inlib::sg::add_image_item(*this,*list,inlib::sg::s_files(),"files.jpg",inlib::cbk::action_files);
-    //if(has_open_panel()) {
-    //  inlib::sg::add_image_item(*this,*list,"open...","files.jpg",inlib::sg::action_open_open_panel);
-    //}
-
   //inlib::sg::add_image_item(*this,*list,inlib::sg::s_to_serv(),"connect_to_wall.jpg",inlib::cbk::action_sg_client_main);
     inlib::sg::add_white_item(*this,*list,inlib::sg::s_sg_serv(),inlib::cbk::action_sg_serv_main);
+    
+    inlib::sg::add_image_item(*this,*list,inlib::sg::s_files(),"files.jpg",inlib::cbk::action_files);
+    if(has_open_panel()) {
+      inlib::sg::add_image_item(*this,*list,"open...","files.jpg",inlib::sg::action_open_open_panel);
+    }
+    if(m_ftps.size()) {
+      inlib::sg::add_image_item(*this,*list,"ftp","location_ftp.jpg",inlib::ftp::action_ftp,inlib::ftp::pos_data(m_ftps,false,0,0));
+    }
 
     inlib::sg::add_white_item(*this,*list,"clear static sg",inlib::sg::action_clear_static_sg);
     inlib::sg::add_image_item(*this,*list,"clear dynamic sg","clear_event.jpg",inlib::sg::action_clear_dynamic_sg);
