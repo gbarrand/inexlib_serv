@@ -609,7 +609,6 @@ inline int handle_view_sg_serv(int a_fd,int a_events,void* a_tag) {
   _main->_alogi("app_Android::handle_view_sg_serv : a_fd %d, a_events %d",a_fd,a_events);
 #endif
   inlib::sg::view_sg_serv* _view_sg_serv = inlib::sg::cast_view_sg_serv(*_main);
-  std::string prot;
   if(!_view_sg_serv->treat_event(exlib::decompress_buffer)) {
     _main->out()  << "handle_view_sg_serv : view_sg_serv::treat_event() failed." << std::endl;
   }
