@@ -107,8 +107,30 @@ public:
     if(prot==inlib::sg::s_protocol_disconnect()) {
       m_sg_serv.stop_sg_client();
 	    
+    } else if(prot==inlib::sg::s_protocol_view_all()) {
+      m_viewer.adapt_camera_to_scene();
+      m_viewer.win_render();
+    } else if(prot==inlib::sg::s_protocol_disable_anim()) {
+      m_viewer.disable_anim();
+      m_viewer.win_render();
+    } else if(prot==inlib::sg::s_protocol_set_background_black()) {
+      m_viewer.set_scene_clear_color(colorf_black());
+      m_viewer.win_render();
+    } else if(prot==inlib::sg::s_protocol_set_background_white()) {
+      m_viewer.set_scene_clear_color(colorf_white());
+      m_viewer.win_render();
+    } else if(prot==inlib::sg::s_protocol_reset_camera()) {
+      m_viewer.reset_camera();
+      m_viewer.win_render();
+	    
     } else if(prot==inlib::sg::s_protocol_clear_static_sg()) {
-      m_viewer.insh_dispatch("clear_static_scene",std::vector<std::string>());
+      m_viewer.insh_dispatch(s_insh_clear_static_scene(),std::vector<std::string>());
+      m_viewer.win_render();
+    } else if(prot==inlib::sg::s_protocol_clear_dynamic_sg()) {
+      m_viewer.insh_dispatch(s_insh_clear_dynamic_scene(),std::vector<std::string>());
+      m_viewer.win_render();
+    } else if(prot==inlib::sg::s_protocol_clear_screen_sg()) {
+      m_viewer.insh_dispatch(s_insh_clear_screen_scene(),std::vector<std::string>());
       m_viewer.win_render();
 
     } else if(prot==inlib::sg::s_protocol_zdoc()) {
@@ -118,7 +140,7 @@ public:
         if(verbose) {
           out << "inlib::sg::view_sg_serv::treat_event :"
               << " for prot " << inlib::sout(prot) << " :"
-              << " " << length << " got bytes."
+              << " got " << length << " decompressed bytes."
               << std::endl;
         }
         if(!m_viewer.receive_document_buffer(buffer,length,inlib::sg::s_protocol_arg_sep())) {

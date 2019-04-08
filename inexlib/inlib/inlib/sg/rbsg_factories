@@ -22,6 +22,7 @@
 #include "button_grid"
 #include "circle"
 #include "circle_arc"
+#include "ellipse"
 #include "colback"
 #include "color"
 #include "colors"
@@ -232,6 +233,7 @@ inline void add_factories(bsg_factories& a_fac) {
 //  a_fac.add_factory<inlib::sg::button_grid>();
   a_fac.add_factory<inlib::sg::circle>();
   a_fac.add_factory<inlib::sg::circle_arc>();
+  a_fac.add_factory<inlib::sg::ellipse>();
   a_fac.add_factory<inlib::sg::colback>();
   a_fac.add_factory<inlib::sg::color>();
   add_factory_ttf<inlib::sg::colors>(a_fac);

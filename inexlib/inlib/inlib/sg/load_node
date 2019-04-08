@@ -11,6 +11,7 @@
 #include "search"
 
 #include "../args"
+#include "../svalues"
 
 #include "view_evd"
 
@@ -75,10 +76,39 @@ inline void load_node(sg::gui_viewer& a_gv,sg::node* a_node,const args& a_args) 
 
     //bool was_empty = dsep.size()?false:true;
 
-    bool movable;
+    inlib::sg::matrix* layout = 0;
+   {std::string sarg;
+    if(a_args.find(inlib::sg::s_translation(),sarg)) { //EsbRootView.scenarios
+      std::vector<float> vals;
+      if(values(sarg," ",false,vals)&&(vals.size()==3)) {
+        if(!layout) layout = new inlib::sg::matrix();
+        layout->mul_translate(vec3f(vals[0],vals[1],vals[2]));  //if any, applied first.
+      }
+    }}
+   {std::string sarg;
+    if(a_args.find(inlib::sg::s_rotation(),sarg)) { //EsbRootView.scenarios
+      std::vector<float> vals;
+      if(values(sarg," ",false,vals)&&(vals.size()==4)) {
+        if(!layout) layout = new inlib::sg::matrix();
+        layout->mul_rotate(vec3f(vals[0],vals[1],vals[2]),vals[3]);
+      }
+    }}
+   {float scale;
+    if(a_args.find<float>(inlib::sg::s_scale(),scale,1)) { //EsbRootView.scenarios
+      if(!layout) layout = new inlib::sg::matrix();
+      layout->mul_scale(scale,scale,scale);
+    }}
+
+    inlib::sg::matrix* mtx = 0;
+   {bool movable;
     if(a_args.find(sg::s_movable(),movable,false)&&movable) { //for pmx.scenarios.
-      sg::separator* sep = new sg::separator;
-      sep->add(new sg::matrix);
+      mtx = new sg::matrix;
+    }}
+
+    if(layout||mtx) {
+      inlib::sg::separator* sep = new inlib::sg::separator;
+      if(layout) sep->add(layout);
+      if(mtx) sep->add(mtx);
       sep->add(a_node);
       dsep.add(sep);
     } else {
