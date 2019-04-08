@@ -7,8 +7,8 @@
   - if perspective : "R/Z" up/down : zoom => change height_angle and not move forwar or backward.
   - revisit passing window size arguments. If passwing "-ww=1000" we have now a window of 1000 pixels in width.
     (On laptop, previous logic preferred th portrait mode, now we prefer here the landscape mode).
-  - Windows, X11 : command line arguments : handlee -host and -port arguments.
-  - anims : we disable the anim timer when stopping an anim.
+  - Windows, X11 : command line arguments : handle -host and -port arguments.
+  - anims : we disable the animation timer when stopping an animation.
   - central menu : files and ftp menu item.
   - handle remote protocols :
       protocol_view_all
