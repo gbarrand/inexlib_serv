@@ -140,6 +140,69 @@ public:
     return true;
   }
 
+  bool receive_zdoc_proxy(std::string& a_opts,uint64& a_uc_length,uint64& a_cp_length,char*& a_cp_buffer) {
+    // The sender pending code is in inlib/net/sg_client::send_buffer_doc().
+    a_opts.clear();
+    a_uc_length = 0;
+    a_cp_length = 0;
+    a_cp_buffer = 0;
+
+    if(!m_sg_client_sock.fetch_string(a_opts)) {
+      m_out << "inlib::net::sg_serv::receive_zdoc_proxy :"
+            << " fetch_string failed."
+            << std::endl;
+      stop_sg_client();
+      return false;
+    }
+
+    if(!m_sg_client_sock.fetch<uint64>(a_uc_length)) {
+      m_out << "inlib::net::sg_serv::receive_zdoc :"
+            << " fetch uc_length failed."
+            << std::endl;
+      a_opts.clear();	    
+      a_uc_length = 0;
+      stop_sg_client();
+      return false;
+    }
+
+    if(!m_sg_client_sock.fetch<uint64>(a_cp_length)) {
+      m_out << "inlib::net::sg_serv::receive_zdoc :"
+            << " fetch cp_length failed."
+            << std::endl;
+      a_opts.clear();	    
+      a_uc_length = 0;
+      stop_sg_client();
+      return false;
+    }
+
+    a_cp_buffer = new char[(size_t)a_cp_length+1]; //+1 in case a_cp_length=0
+    if(!a_cp_buffer) {
+      m_out << "inlib::net::sg_serv::receive_zdoc :"
+            << " can't allocate " << a_cp_length << " bytes."
+            << std::endl;
+      a_opts.clear();	    
+      a_uc_length = 0;
+      a_cp_length = 0;
+      stop_sg_client();
+      return false;
+    }
+
+    if(!m_sg_client_sock.fetch_buffer(a_cp_buffer,a_cp_length)) { //a_cp_length=0 is ok.
+      m_out << "inlib::net::sg_serv::receive_zdoc :"
+            << " fetch_buffer failed."
+            << std::endl;
+      a_opts.clear();	    
+      a_uc_length = 0;
+      a_cp_length = 0;
+      delete [] a_cp_buffer;
+      a_cp_buffer = 0;
+      stop_sg_client();
+      return false;
+    }
+
+    return true;
+  }
+
 protected:
   std::ostream& m_out;
   net::inet_socket m_data_server_sock;
