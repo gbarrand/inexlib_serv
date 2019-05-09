@@ -1,6 +1,21 @@
 1.2.0 :
   - protocol : handle inlib::sg::colored_sized_points. (Cowork with inexlib_py/1.4.0).
   - X11 : handle mouse wheel.
+  - if starting from command line, there are the options :
+      -h, -help           : dump this message.
+      -verbose            : verbose mode.
+      -version            : dump the version of the application.
+      -ww=<window width>  : if -wh is not given, wh is computed to have a A4 landscape ratio.
+      -wh=<window height> : if -ww is not given, ww is computed to have a A4 landscape ratio.
+      -portrait           : if needed, swap ww and wh to be in portrait mode.
+      -land               : if needed, swap ww and wh to be in landscape mode.
+      -full_screen        : to be full screen.
+      -no_decos           : to remove window decorations.
+      -black              : start with a black backgroud for the viewing area.
+      -monitors           : dump the number of monitors known by the X11 server.
+     specific to inexlib_serv :      
+      -host=<ip>          : ip of the machine running the application.
+      -port=<port>        : port to listen for a remote sg_client.
 
 1.1.0 :
   - camera buttons at right : central button : if in examiner viewer (being "3D" in left panel) :
