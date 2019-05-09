@@ -1,3 +1,7 @@
+1.2.0 :
+  - protocol : handle inlib::sg::colored_sized_points. (Cowork with inexlib_py/1.4.0).
+  - X11 : handle mouse wheel.
+
 1.1.0 :
   - camera buttons at right : central button : if in examiner viewer (being "3D" in left panel) :
       "R/RX" mode : left/right rotate around y, up/down rotate around x.
