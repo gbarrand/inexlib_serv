@@ -19,7 +19,7 @@ public:
 public:
   INLIB_SCLASS(inlib::sg::view_sg_serv)
 public:
-  view_sg_serv(gui_viewer& a_viewer,bool a_verbose = false)
+  view_sg_serv(gui_viewer& a_viewer,bool /*a_verbose*/ = false)
   :m_viewer(a_viewer)
   ,m_initialize_func(0)
   ,m_connect_func(0)
@@ -72,7 +72,7 @@ public:
                      << " with host " << sout(a_host) << ", and port " << a_port << "."  << std::endl;
     }
     if(m_initialize_func) m_initialize_func(m_data_1,m_data_2);
-    return m_sg_serv.initialize(a_host,a_port,m_connect_func,m_disconnect_func,m_data_1,m_data_2);
+    return m_sg_serv.initialize(a_host,a_port,m_connect_func,m_disconnect_func,m_data_1,m_data_2,m_viewer.verbose());
   }
   void finalize() {
     if(m_viewer.verbose()) {
@@ -106,7 +106,14 @@ public:
     
     if(prot==inlib::sg::s_protocol_disconnect()) {
       m_sg_serv.stop_sg_client();
-	    
+/*	    
+    } else if(prot==inlib::sg::s_protocol_acknowledge()) {
+      if(!m_sg_serv.sg_client_sock().send_string("ok")) {
+        out  << "inlib::sg::view_sg_serv::treat_event : send_string() failed." << std::endl;
+        m_sg_serv.stop_sg_client();
+        return false;
+      }
+*/  
     } else if(prot==inlib::sg::s_protocol_view_all()) {
       m_viewer.adapt_camera_to_scene();
       m_viewer.win_render();
@@ -199,7 +206,19 @@ public:
     }
     return true;
   }
-  
+/*		       
+    create_main_button(m_out,m_res_dir,m_params,m_image_readers,
+                       m_camenu_sep,a_wcw,a_wch,a_wb,a_hb,0,
+                       a_nb-6,0,
+                       "-|",
+                       m_camenu_sg_serv_has_client_text_button,
+                       new gv_cbk(*this,action_none))
+    if(m_params.m_sg_serv_has_client) {
+      m_camenu_sg_serv_has_client_text_button.back_color::color = colorf_pink();
+    } else {
+      m_camenu_sg_serv_has_client_text_button.back_color::color = m_params.m_gui_back_color;
+    }		          
+*/
 protected:
   gui_viewer& m_viewer;
   initialize_func m_initialize_func;
