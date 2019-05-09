@@ -67,13 +67,14 @@ public:
   bool initialize(const std::string& a_this_host,unsigned int a_dc_port,
                   sg_serv_args::connect_func a_connect_func,
                   sg_serv_args::disconnect_func a_disconnect_func,
-                  void* a_sg_serv_args_data_1,void* a_sg_serv_args_data_2) {
+                  void* a_sg_serv_args_data_1,void* a_sg_serv_args_data_2,bool a_verbose) {
     m_args.m_host = a_this_host;
     m_args.m_port = a_dc_port;
     m_args.m_connect_func = a_connect_func;
     m_args.m_disconnect_func = a_disconnect_func;
     m_args.m_data_1 = a_sg_serv_args_data_1;
     m_args.m_data_2 = a_sg_serv_args_data_2;
+    m_args.m_verbose = a_verbose;
 
     m_args.m_continue = true;
     m_args.m_exit = false;

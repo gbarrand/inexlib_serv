@@ -36,6 +36,7 @@ public:
   ,m_data_2(0)
   ,m_num_try(3)
   ,m_milli_secs(100)
+  ,m_verbose(false)
 
   ,m_continue(true),m_exit(false)
   {}
@@ -53,6 +54,7 @@ public:
   ,m_data_2(a_from.m_data_2)
   ,m_num_try(a_from.m_num_try)
   ,m_milli_secs(a_from.m_milli_secs)
+  ,m_verbose(a_from.m_verbose)
   ,m_continue(a_from.m_continue)
   ,m_exit(a_from.m_exit)
   {}
@@ -65,6 +67,7 @@ public:
     m_data_2 = a_from.m_data_2;
     m_num_try = a_from.m_num_try;
     m_milli_secs = a_from.m_milli_secs;
+    m_verbose = a_from.m_verbose;
     m_continue = a_from.m_continue;
     m_exit = a_from.m_exit;
     return *this;
@@ -85,6 +88,7 @@ public:
   void* m_data_2;
   unsigned int m_num_try;
   unsigned int m_milli_secs;
+  bool m_verbose;
 
   bool m_continue;
   bool m_exit;
@@ -111,7 +115,7 @@ inline void* sg_serv_main(void* a_tag) {
     return 0;
   }
 
-  //args.m_out << "debug : sg_serv_main : start" << std::endl;
+  if(args.m_verbose) args.m_out << "sg_serv_main : start" << std::endl;
 
   if(!server_sock.bind_milli(args.m_host,args.m_port,args.m_num_try,args.m_milli_secs,true)) {
     args.m_out << "sg_serv_main : bind failed." << std::endl;
@@ -137,7 +141,7 @@ inline void* sg_serv_main(void* a_tag) {
         args.m_out << "sg_serv_main : accept ok but socket not connected !" << std::endl;
         server_sock.disconnect();
       } else {
-        //args.m_out << "debug : sg_serv_main : accept : ok." << std::endl;
+        if(args.m_verbose) args.m_out << "sg_serv_main : accept : ok." << std::endl;
       }
     }
   }
