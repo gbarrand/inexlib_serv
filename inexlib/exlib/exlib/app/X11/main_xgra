@@ -78,8 +78,9 @@ public:
        ,const std::string& a_tmp_dir
        ,bool a_verbose
        ,Display* a_display
+       ,unsigned int a_monitor
        ,Window a_window)
-  :parent_pv_holder(a_out,a_display,a_window)
+  :parent_pv_holder(a_out,a_display,a_monitor,a_window)
   ,parent(a_out,
           parent_pv_holder::gra_mgr(),parent_pv_holder::ttf(),parent_pv_holder::selection(),
           a_data_dir,a_res_dir,a_out_dir,a_tmp_dir,a_verbose,0)
