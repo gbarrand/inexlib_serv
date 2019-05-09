@@ -11,6 +11,7 @@
 #include "_switch"
 #include "arrow_button"
 #include "atb_vertices"
+#include "colored_sized_points"
 #include "axis"
 #include "back_area"
 //#include "base_camera"
@@ -23,6 +24,7 @@
 #include "circle"
 #include "circle_arc"
 #include "ellipse"
+#include "xy_grid"
 #include "colback"
 #include "color"
 #include "colors"
@@ -222,6 +224,7 @@ inline void add_factories(bsg_factories& a_fac) {
   a_fac.add_factory_composite<inlib::sg::_switch>();
   a_fac.add_factory<inlib::sg::arrow_button>();
   a_fac.add_factory<inlib::sg::atb_vertices>();
+  a_fac.add_factory<inlib::sg::colored_sized_points>();
   add_factory_ttf<inlib::sg::axis>(a_fac);
   a_fac.add_factory<inlib::sg::back_area>();
 //  a_fac.add_factory<inlib::sg::base_camera>();
@@ -234,6 +237,7 @@ inline void add_factories(bsg_factories& a_fac) {
   a_fac.add_factory<inlib::sg::circle>();
   a_fac.add_factory<inlib::sg::circle_arc>();
   a_fac.add_factory<inlib::sg::ellipse>();
+  a_fac.add_factory<inlib::sg::xy_grid>();
   a_fac.add_factory<inlib::sg::colback>();
   a_fac.add_factory<inlib::sg::color>();
   add_factory_ttf<inlib::sg::colors>(a_fac);
