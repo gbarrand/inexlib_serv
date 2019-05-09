@@ -55,6 +55,18 @@ public:
     if(void* p = inlib::cmp_cast<parent_evd>(this,a_class)) return p;
     return parent::cast(a_class);
   }
+public:
+  static const std::string& s_version() {
+    static const std::string s_v(INEXLIB_SERV_VERSION);
+    return s_v;
+  }
+  static const std::string& s_args_help() {
+    static const std::string s_v("\
+-host=<ip>          : ip of the machine running the application.\n\
+-port=<port>        : port to listen for a remote sg_client.\n\
+");
+    return s_v;
+  }
 protected:
   INLIB_CLASS_STRING(format_dst)
 protected:
@@ -95,6 +107,8 @@ protected:
     if(!inlib::device::stop_app_button()){
       inlib::sg::add_image_item(*this,*list,"exit","application_exit.jpg",inlib::sg::action_set_to_exit);
     }
+
+    m_params.m_list_visible_items = list->items.size(); //we have not so much items. Have all them visible. (default is 7).
 
     return list;
   }
@@ -159,6 +173,7 @@ public:
 
     m_params.m_scene_screen_color = inlib::colorf_black();
 */
+
     show_main_menu();
   }
   virtual ~main() {}
