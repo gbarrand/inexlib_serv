@@ -1,8 +1,0 @@
-#!/bin/sh -f
-
-# validity :  22 October 2033
-#  (33+1)-10 = 24*365 = 8760 "rounded" to 10000
-
-keytool -genkeypair -keystore inexlib_serv.jks -alias inexlib_serv  -keysize 1024 -validity 10000
-
-#keytool -importkeystore -srckeystore inexlib_serv.jks -destkeystore inexlib_serv.jks -deststoretype pkcs12
